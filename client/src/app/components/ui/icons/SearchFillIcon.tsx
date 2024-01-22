@@ -1,5 +1,5 @@
-import { IoSearch } from 'react-icons/io5';
+import { FaSearch } from 'react-icons/fa';
 
 export default function SearchFillIcon() {
-	return <IoSearch />;
+	return <FaSearch />;
 }

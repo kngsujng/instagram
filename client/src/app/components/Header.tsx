@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import HomeIcon from './ui/icons/HomeIcon';
 import HomeFillIcon from './ui/icons/HomeFillIcon';
@@ -9,7 +10,8 @@ import SearchFillIcon from './ui/icons/SearchFillIcon';
 import NewIcon from './ui/icons/NewIcon';
 import NewFillIcon from './ui/icons/NewFillIcon';
 import SignInIcon from './ui/icons/SignInIcon';
-import SignInFillIcon from './ui/icons/SignInFillIcon';
+import SignOutIcon from './ui/icons/SignOutIcon';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const navbars = [
 	{ href: '/', icon: <HomeIcon />, clickedIcon: <HomeFillIcon /> },
@@ -19,11 +21,11 @@ const navbars = [
 		icon: <NewIcon />,
 		clickedIcon: <NewFillIcon />,
 	},
-	{ href: '/signin', icon: <SignInIcon />, clickedIcon: <SignInFillIcon /> },
 ];
 
 export default function Header() {
 	const pathname = usePathname();
+	const { data: session } = useSession();
 	return (
 		<header className="flex justify-between my-6 px-6 pb-2 sticky top-0 z-10 border-b">
 			<Link href="/">
@@ -38,6 +40,24 @@ export default function Header() {
 							</Link>
 						</li>
 					))}
+					{session && (
+						<Image
+							src={session.user?.image || ''}
+							alt={session.user?.name || 'User'}
+							width="30"
+							height="30"
+							className="rounded-full"
+						/>
+					)}
+					{session ? (
+						<button onClick={() => signOut()}>
+							<SignOutIcon />
+						</button>
+					) : (
+						<button onClick={() => signIn()}>
+							<SignInIcon />
+						</button>
+					)}
 				</ul>
 			</nav>
 		</header>
