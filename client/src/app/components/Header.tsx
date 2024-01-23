@@ -25,7 +25,7 @@ const navbars = [
 
 export default function Header() {
 	const pathname = usePathname();
-	const { data: session } = useSession();
+	const { data: session } = useSession(); // 2. CSR - session
 	const user = session?.user;
 	return (
 		<header className="flex justify-between my-6 px-6 pb-2 sticky top-0 z-10 border-b">
@@ -46,7 +46,7 @@ export default function Header() {
 							<Profile
 								image={user.image}
 								size="sm"
-								border={false}
+								border
 							/>
 						</Link>
 					)}

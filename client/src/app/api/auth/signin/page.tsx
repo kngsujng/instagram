@@ -12,7 +12,7 @@ type Props = {
 export default async function SignInPage({
 	searchParams: { callbackUrl },
 }: Props) {
-	const session = await getServerSession(authOptions);
+	const session = await getServerSession(authOptions); // 1. SSR - session
 
 	if (session) {
 		return { redirect: { destination: '/' } };
