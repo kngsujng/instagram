@@ -1,3 +1,10 @@
+import SideBar from './components/SideBar';
+
 export default function HomePage() {
-	return <h1>안뇽!</h1>;
+	return (
+		<div className="flex justify-between">
+			<h1>Home Page</h1>
+			<SideBar />
+		</div>
+	);
 }

@@ -21,7 +21,7 @@ export default function RootLayout({
 			<body className="w-full max-w-screen-xl overflow-auto mx-auto">
 				<AuthContext>
 					<Header />
-					<main>{children}</main>
+					<main className="px-8">{children}</main>
 				</AuthContext>
 			</body>
 		</html>

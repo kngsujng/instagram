@@ -1,7 +1,6 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import HomeIcon from './ui/icons/HomeIcon';
 import HomeFillIcon from './ui/icons/HomeFillIcon';
@@ -12,6 +11,7 @@ import NewFillIcon from './ui/icons/NewFillIcon';
 import SignInIcon from './ui/icons/SignInIcon';
 import SignOutIcon from './ui/icons/SignOutIcon';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Profile from './Profile';
 
 const navbars = [
 	{ href: '/', icon: <HomeIcon />, clickedIcon: <HomeFillIcon /> },
@@ -41,12 +41,10 @@ export default function Header() {
 						</li>
 					))}
 					{session && (
-						<Image
-							src={session.user?.image || ''}
-							alt={session.user?.name || 'User'}
-							width="30"
-							height="30"
-							className="rounded-full"
+						<Profile
+							session={session}
+							size="sm"
+							border={false}
 						/>
 					)}
 					{session ? (
