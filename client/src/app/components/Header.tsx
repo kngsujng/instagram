@@ -26,6 +26,7 @@ const navbars = [
 export default function Header() {
 	const pathname = usePathname();
 	const { data: session } = useSession();
+	const user = session?.user;
 	return (
 		<header className="flex justify-between my-6 px-6 pb-2 sticky top-0 z-10 border-b">
 			<Link href="/">
@@ -40,12 +41,14 @@ export default function Header() {
 							</Link>
 						</li>
 					))}
-					{session && (
-						<Profile
-							session={session}
-							size="sm"
-							border={false}
-						/>
+					{user && (
+						<Link href={`/user/${user.username}`}>
+							<Profile
+								image={user.image}
+								size="sm"
+								border={false}
+							/>
+						</Link>
 					)}
 					{session ? (
 						<button onClick={() => signOut()}>

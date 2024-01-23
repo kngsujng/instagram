@@ -5,16 +5,19 @@ import Profile from './Profile';
 
 export default function SideBar() {
 	const { data: session } = useSession();
+	const user = session?.user;
 
 	return (
 		<article className="flex flex-col gap-10">
 			{session && (
 				<div className="flex gap-6">
-					<Profile
-						session={session}
-						size="md"
-						border
-					/>
+					{user && (
+						<Profile
+							image={user.image}
+							size="md"
+							border
+						/>
+					)}
 					<div className="flex flex-col">
 						<h2 className="font-bold text-lg">
 							{session.user && session.user.email}

@@ -6,22 +6,22 @@ import { FcGoogle } from 'react-icons/fc';
 
 type Props = {
 	providers: Record<string, ClientSafeProvider>;
+	callbackUrl: string;
 };
 
-export default function SocialSignInButton({ providers }: Props) {
-	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get('callbackUrl') as string;
-	console.log(callbackUrl);
+export default function SocialSignInButton({ providers, callbackUrl }: Props) {
+	// const searchParams = useSearchParams();
+	// const callbackUrl = searchParams.get('callbackUrl') as string;
 	return (
 		<>
-			{Object.values(providers).map((provider) => (
-				<div key={provider.name}>
+			{Object.values(providers).map(({ name, id }) => (
+				<div key={name}>
 					<button
-						onClick={() => signIn(provider.id, { callbackUrl })}
+						onClick={() => signIn(id, { callbackUrl })}
 						className="flex items-center gap-2 bg-black text-md text-white p-2 px-3 rounded-md"
 					>
 						<FcGoogle />
-						{provider.name}로 로그인
+						{name}로 로그인
 					</button>
 				</div>
 			))}

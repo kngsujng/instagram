@@ -1,29 +1,23 @@
 import { Profile } from 'next-auth';
-import Image from 'next/image';
-import Link from 'next/link';
 
 type Props = {
-	session: Profile;
+	image?: string | null;
 	size: 'sm' | 'md';
 	border: true | false;
 };
 
-export default function Profile({ session, size, border }: Props) {
+export default function Profile({ image, size, border }: Props) {
 	return (
-		<>
-			{session && (
-				<Link href={`/user/${session.user && session.user.name}`}>
-					<Image
-						src={(session.user && session.user.image) || ''}
-						alt={(session.user && session.user.name) || ''}
-						width={size === 'sm' ? '30' : '60'}
-						height={size === 'sm' ? '30' : '60'}
-						className={`rounded-full ${
-							border ? 'border-4 border-red-500' : 'border-b-0'
-						}`}
-					/>
-				</Link>
-			)}
-		</>
+		<div className="rounded-full bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300">
+			{/* eslint-disable-next-line @next/next/no-img-element */}
+			<img
+				src={image || ''}
+				alt="user image"
+				width={size === 'sm' ? '30' : '60'}
+				height={size === 'sm' ? '30' : '60'}
+				className={`rounded-full ${border && 'p-[0.2rem]'}`}
+				referrerPolicy="no-referrer"
+			/>
+		</div>
 	);
 }
