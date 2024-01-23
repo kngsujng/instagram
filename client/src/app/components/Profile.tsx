@@ -1,5 +1,6 @@
 import { Profile } from 'next-auth';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
 	session: Profile;
@@ -11,15 +12,17 @@ export default function Profile({ session, size, border }: Props) {
 	return (
 		<>
 			{session && (
-				<Image
-					src={(session.user && session.user.image) || ''}
-					alt={(session.user && session.user.name) || ''}
-					width={size === 'sm' ? '30' : '60'}
-					height={size === 'sm' ? '30' : '60'}
-					className={`rounded-full ${
-						border ? 'border-4 border-red-500' : 'border-b-0'
-					}`}
-				/>
+				<Link href={`/user/${session.user && session.user.name}`}>
+					<Image
+						src={(session.user && session.user.image) || ''}
+						alt={(session.user && session.user.name) || ''}
+						width={size === 'sm' ? '30' : '60'}
+						height={size === 'sm' ? '30' : '60'}
+						className={`rounded-full ${
+							border ? 'border-4 border-red-500' : 'border-b-0'
+						}`}
+					/>
+				</Link>
 			)}
 		</>
 	);
