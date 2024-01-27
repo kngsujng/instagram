@@ -15,14 +15,17 @@ export default function PostList() {
 	return (
 		<>
 			{loading && (
-				<div>
-					<FadeLoader color="red" />
+				<div className="flex justify-center text-center mt-32">
+					<FadeLoader color="pink" />
 				</div>
 			)}
 			{posts && (
 				<ul>
 					{posts.map((post) => (
-						<li key={post.id}>
+						<li
+							key={post.id}
+							className="mb-4"
+						>
 							<PostCard post={post} />
 						</li>
 					))}

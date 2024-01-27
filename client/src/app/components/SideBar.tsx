@@ -12,8 +12,7 @@ export default function SideBar({ user: { name, username, image } }: Props) {
 				{image && (
 					<Profile
 						image={image}
-						size="md"
-						border
+						size="lg"
 					/>
 				)}
 				<div className="flex flex-col">
