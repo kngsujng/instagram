@@ -13,7 +13,9 @@ export default function Profile({ image, size = 'md', border = false }: Props) {
 			<img
 				src={image || ''}
 				alt="user image"
-				className={`rounded-full bg-white ${getImageSizeStyle(size)}`}
+				className={`rounded-full object-cover bg-white ${getImageSizeStyle(
+					size
+				)}`}
 				referrerPolicy="no-referrer"
 			/>
 		</div>
