@@ -19,7 +19,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className={openSans.className}>
-			<body className="w-full max-w-screen-xl overflow-auto mx-auto">
+			<body
+				className="w-full max-w-screen-xl overflow-auto mx-auto"
+				suppressHydrationWarning={true}
+			>
 				<AuthContext>
 					<Header />
 					<main className="p-8 w-full flex justify-center bg-neutral-50 min-h-full">
