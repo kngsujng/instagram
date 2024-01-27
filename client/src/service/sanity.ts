@@ -1,4 +1,6 @@
 import { createClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 // sanity 데이터베이스 조작할 수 있는 권한 설정
 export const client = createClient({
@@ -8,3 +10,9 @@ export const client = createClient({
 	apiVersion: '2024-01-23',
 	token: process.env.SANITY_SECRET_TOKEN,
 });
+
+const builder = imageUrlBuilder(client);
+
+export default function urlFor(image: SanityImageSource) {
+	return builder.image(image).width(800).url();
+}
