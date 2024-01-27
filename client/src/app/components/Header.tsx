@@ -28,7 +28,7 @@ export default function Header() {
 	const { data: session } = useSession(); // 2. CSR - session
 	const user = session?.user;
 	return (
-		<header className="flex justify-between mt-6 px-6 pb-2 sticky top-0 z-10 border-b">
+		<header className="flex bg-white justify-between p-4 sticky top-0 z-10 border-b">
 			<Link href="/">
 				<h1 className="text-3xl font-bold">Instagram</h1>
 			</Link>
