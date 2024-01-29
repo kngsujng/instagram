@@ -5,14 +5,16 @@ import { useState } from 'react';
 import { ProfileUser } from '@/model/user';
 import Spinner from './Spinner';
 import UserCard from './UserCard';
+import useDebounce from '../hooks/useDebounce';
 
 export default function UserSearch() {
 	const [keyword, setKeyword] = useState('');
+	const debouncedSearch = useDebounce(keyword, 500);
 	const {
 		data: users,
 		isLoading: loading,
 		error,
-	} = useSWR<ProfileUser[]>(`/api/search/${keyword}`);
+	} = useSWR<ProfileUser[]>(`/api/search/${debouncedSearch}`);
 
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
