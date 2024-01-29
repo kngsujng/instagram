@@ -1,17 +1,18 @@
 type Props = {
 	text: string;
 	onClick: () => void;
+	red: boolean;
 };
 
-export default function Button({ text, onClick }: Props) {
+export default function Button({ text, onClick, red }: Props) {
 	return (
-		<div className="rounded-md bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300 p-[0.15rem]">
-			<button
-				className="bg-white rounded-sm text-base p-[0.3rem]"
-				onClick={onClick}
-			>
-				{text}
-			</button>
-		</div>
+		<button
+			className={`border-none rounded-md py-2 px-8 text-white font-bold leading-4 ${
+				red ? 'bg-red-500' : 'bg-sky-500'
+			}`}
+			onClick={onClick}
+		>
+			{text}
+		</button>
 	);
 }

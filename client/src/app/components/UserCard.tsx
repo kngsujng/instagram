@@ -1,9 +1,9 @@
-import { ProfileUser } from '@/model/user';
+import { SearchUser } from '@/model/user';
 import Link from 'next/link';
 import Profile from './../components/Profile';
 
 type Props = {
-	user: ProfileUser;
+	user: SearchUser;
 };
 
 export default function UserCard({
@@ -11,7 +11,7 @@ export default function UserCard({
 }: Props) {
 	return (
 		<Link
-			href="/user/${username}"
+			href={`/user/${username}`}
 			className="w-full flex items-center rouded-sm border border-neutral-300 mb-2 p-4 bg-white hover:bg-neutral-50"
 		>
 			<Profile

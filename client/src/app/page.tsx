@@ -4,11 +4,11 @@ import PostList from './components/PostList';
 import SideBar from './components/SideBar';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
-import { User } from '@/model/user';
+import { AuthUser } from '@/model/user';
 
 export default async function HomePage() {
 	const session = await getServerSession(authOptions); // 1. SSR - session
-	const user = session?.user as User;
+	const user = session?.user as AuthUser;
 
 	if (!user) {
 		redirect('api/auth/signin');
