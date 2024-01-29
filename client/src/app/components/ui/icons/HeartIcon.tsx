@@ -1,5 +1,9 @@
 import { IoIosHeartEmpty } from 'react-icons/io';
 
-export default function HeartIcon() {
-	return <IoIosHeartEmpty className="w-6 h-6" />;
+type Props = {
+	className?: string;
+};
+
+export default function HeartIcon({ className }: Props) {
+	return <IoIosHeartEmpty className={className || 'w-6 h-6'} />;
 }

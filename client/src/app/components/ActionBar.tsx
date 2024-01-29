@@ -1,5 +1,5 @@
 import { SimplePost } from '@/model/post';
-import BookmarkIcon from './../components/ui/icons/BookmarIcon';
+import BookmarkIcon from './ui/icons/BookmarkIcon';
 import HeartIcon from './ui/icons/HeartIcon';
 import { parseDate } from '@/util/date';
 

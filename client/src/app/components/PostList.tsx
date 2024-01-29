@@ -2,7 +2,7 @@
 
 import useSWR from 'swr';
 import { SimplePost } from '@/model/post';
-import PostCard from './PostCard';
+import PostListCard from './PostListCard';
 import Spinner from './Spinner';
 
 export default function PostList() {
@@ -22,7 +22,7 @@ export default function PostList() {
 							key={post.id}
 							className="mb-4"
 						>
-							<PostCard
+							<PostListCard
 								post={post}
 								priority={index < 2 && true}
 							/>

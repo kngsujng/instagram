@@ -13,6 +13,13 @@ const simpleProjection = `
   "comments": count(comments),
 `;
 
+function mapPosts(posts: SimplePost[]) {
+	return posts.map((post: SimplePost) => ({
+		...post,
+		image: urlFor(post.image),
+	}));
+}
+
 export async function getFollowingPostsOf(username: string) {
 	return client
 		.fetch(
@@ -22,9 +29,7 @@ export async function getFollowingPostsOf(username: string) {
     | order(_createdAt desc){${simpleProjection}}
   `
 		)
-		.then((posts) =>
-			posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
-		);
+		.then(mapPosts);
 }
 
 // -> : refernce에서 한 항목 가져오고 싶을 때
@@ -46,4 +51,43 @@ export async function getPost(id: string) {
   `
 		)
 		.then((post) => ({ ...post, image: urlFor(post.image) }));
+}
+
+export async function getPostsOf(username: string) {
+	return client
+		.fetch(
+			`
+    *[_type == 'post' && author->username == "${username}"]
+      | order(_createdAt desc){
+        ${simpleProjection}
+      }
+  `
+		) //
+		.then(mapPosts);
+}
+
+export async function getLikedPostsOf(username: string) {
+	return client
+		.fetch(
+			`
+    *[_type == 'post' && "${username}" in likes[]->username]
+      | order(_createdAt desc){
+        ${simpleProjection}
+      }
+  `
+		) //
+		.then(mapPosts);
+}
+
+export async function getSavedPostsOf(username: string) {
+	return client
+		.fetch(
+			`
+    *[_type == 'post' && _id in *[_type=='user' && username=='${username}'].bookmarks[]._ref]
+      | order(_createdAt desc){
+        ${simpleProjection}
+      }
+  `
+		) //
+		.then(mapPosts);
 }

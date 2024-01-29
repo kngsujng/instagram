@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { SimplePost } from '@/model/post';
-import Profile from './../components/Profile';
+import Profile from './Profile';
 import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
-import ModalPortal from './../components/ModalPortal';
-import PostModal from './../components/PostModal';
+import ModalPortal from './ModalPortal';
+import PostModal from './PostModal';
 import PostDetail from './PostDetail';
 import PostUserProfile from './PostUserProfile';
 
@@ -16,7 +16,7 @@ type Props = {
 	priority?: boolean;
 };
 
-export default function PostCard({ post, priority }: Props) {
+export default function PostListCard({ post, priority }: Props) {
 	const { createdAt, username, userImage, image, likes, text } = post;
 	const [onModal, setOnModal] = useState<boolean>(false);
 
@@ -26,7 +26,6 @@ export default function PostCard({ post, priority }: Props) {
 				image={userImage}
 				username={username}
 			/>
-			{/* eslint-disable-next-line @next/next/no-img-element */}
 			<Image
 				className="w-full object-covera aspect-square"
 				src={image}
