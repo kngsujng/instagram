@@ -25,7 +25,7 @@ export default function RootLayout({
 			>
 				<AuthContext>
 					<Header />
-					<main className="p-8 w-full flex justify-center min-h-full">
+					<main className="p-8 w-full flex justify-center min-h-full max-w-screen-xl mx-auto">
 						<SwrConfigContext>{children}</SwrConfigContext>
 					</main>
 				</AuthContext>

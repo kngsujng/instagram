@@ -15,7 +15,7 @@ export default async function UserPage({ params: { username } }: Props) {
 		notFound();
 	}
 	return (
-		<section className="flex flex-col">
+		<section className="w-full flex flex-col">
 			<UserProfile user={user} />
 			<UserPost user={user} />
 		</section>
