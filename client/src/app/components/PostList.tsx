@@ -3,7 +3,7 @@
 import useSWR from 'swr';
 import { SimplePost } from '@/model/post';
 import PostCard from './PostCard';
-import { FadeLoader } from 'react-spinners';
+import Spinner from './Spinner';
 
 export default function PostList() {
 	const {
@@ -14,11 +14,7 @@ export default function PostList() {
 
 	return (
 		<>
-			{loading && (
-				<div className="flex justify-center text-center mt-32">
-					<FadeLoader color="pink" />
-				</div>
-			)}
+			{loading && <Spinner />}
 			{posts && (
 				<ul>
 					{posts.map((post, index) => (

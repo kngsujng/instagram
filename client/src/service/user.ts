@@ -38,3 +38,18 @@ export async function getUserByUsername(username: string) {
 	// following/follower는 user를 reference하고 있는데,
 	// user 정보 다 가져오는게 아니라 그 중에서도 username과 image만 가져오기 !
 }
+
+export async function searchUsers(keyword?: string) {
+	const query = keyword
+		? `&& (name match "${keyword}") || (username match "${keyword}")`
+		: '';
+	return client.fetch(
+		`
+        *[_type=='user' ${query}]{
+          ...,
+          "following" : count(following),
+          "followers" : count(followers)
+        }
+      `
+	);
+}
