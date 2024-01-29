@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { useState } from 'react';
 import { ProfileUser } from '@/model/user';
 import Spinner from './Spinner';
+import UserCard from './UserCard';
 
 export default function UserSearch() {
 	const [keyword, setKeyword] = useState('');
@@ -18,10 +19,13 @@ export default function UserSearch() {
 	};
 
 	return (
-		<>
-			<form onSubmit={onSubmit}>
+		<section className="w-full max-w-2xl flex flex-col items-center">
+			<form
+				onSubmit={onSubmit}
+				className="w-full mb-4"
+			>
 				<input
-					className="border border-gray-200 w-full outline-none"
+					className="w-full text-xl p-3 border border-gray-400 outline-none"
 					type="text"
 					placeholder="Search form a username or name"
 					autoFocus
@@ -34,14 +38,14 @@ export default function UserSearch() {
 			{!loading && !error && users?.length === 0 && (
 				<p>찾는 사용자가 없음 😭</p>
 			)}
-			<ul>
+			<ul className="w-full p-4">
 				{users &&
 					users.map((user) => (
 						<li key={user.username}>
-							<p>{user.username}</p>
+							<UserCard user={user} />
 						</li>
 					))}
 			</ul>
-		</>
+		</section>
 	);
 }
