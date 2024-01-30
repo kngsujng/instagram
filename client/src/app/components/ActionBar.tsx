@@ -1,21 +1,49 @@
-import { SimplePost } from '@/model/post';
-import BookmarkIcon from './ui/icons/BookmarkIcon';
-import HeartIcon from './ui/icons/HeartIcon';
+'use client';
+
+import { useState } from 'react';
+import ToggleButton from './ui/ToggleButton';
 import { parseDate } from '@/utils/date';
+import HeartFillIcon from './ui/icons/HeartFillIcon';
+import HeartIcon from './ui/icons/HeartIcon';
+import BookmarkIcon from './ui/icons/BookmarkIcon';
+import BookmarkFillIcon from './ui/icons/BookmarkFillIcon';
+import { SimplePost } from '@/model/post';
+import { useSession } from 'next-auth/react';
+import { useSWRConfig } from 'swr';
 
 type Props = {
-	likes: string[];
-	text: string;
-	createdAt: string;
-	username: string;
+	post: SimplePost;
 };
 
-export default function ActionBar({ likes, text, createdAt, username }: Props) {
+export default function ActionBar({ post }: Props) {
+	const { id, likes, username, text, createdAt } = post;
+	const { data: session } = useSession();
+	const user = session?.user;
+	const liked = user ? likes.includes(user.username) : false;
+	const [bookmarked, setBookmarked] = useState(false);
+	const { mutate } = useSWRConfig();
+	const handleLike = (like: boolean) => {
+		fetch('/api/likes', {
+			method: 'PUT',
+			body: JSON.stringify({ id, like }),
+		}).then(() => mutate('/api/posts')); // 캐시 업데이트 (SWR : '/api/posts'가 키)
+	};
+
 	return (
 		<>
 			<div className="flex justify-between my-2 px-4">
-				<BookmarkIcon />
-				<HeartIcon />
+				<ToggleButton
+					toggled={liked}
+					onToggle={handleLike}
+					onIcon={<HeartFillIcon />}
+					offIcon={<HeartIcon />}
+				/>
+				<ToggleButton
+					toggled={bookmarked}
+					onToggle={setBookmarked}
+					onIcon={<BookmarkFillIcon />}
+					offIcon={<BookmarkIcon />}
+				/>
 			</div>
 			<div className="px-4 py-1">
 				<p className="text-sm font-bold mb-2">{`${likes.length ?? 0} ${

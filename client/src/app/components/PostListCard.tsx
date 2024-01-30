@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { SimplePost } from '@/model/post';
-import Profile from './Profile';
 import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
 import ModalPortal from './ModalPortal';
@@ -35,12 +34,7 @@ export default function PostListCard({ post, priority }: Props) {
 				priority={priority}
 				onClick={() => setOnModal(true)}
 			/>
-			<ActionBar
-				createdAt={createdAt}
-				likes={likes}
-				text={text}
-				username={username}
-			/>
+			<ActionBar post={post} />
 			<CommentForm />
 			{onModal && (
 				<ModalPortal>
