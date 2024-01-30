@@ -9,6 +9,7 @@ import ModalPortal from './ModalPortal';
 import PostModal from './PostModal';
 import PostDetail from './PostDetail';
 import PostUserProfile from './PostUserProfile';
+import usePosts from '../hooks/usePosts';
 
 type Props = {
 	post: SimplePost;
@@ -18,7 +19,10 @@ type Props = {
 export default function PostListCard({ post, priority }: Props) {
 	const { username, userImage, image, comments, text } = post;
 	const [onModal, setOnModal] = useState<boolean>(false);
-
+	const { postComment } = usePosts();
+	const handlePostComment = (comment: string) => {
+		postComment(post, comment);
+	};
 	return (
 		<article className="rounded-lg shadow-md border-gray-200">
 			<PostUserProfile
@@ -46,7 +50,7 @@ export default function PostListCard({ post, priority }: Props) {
 					>{`View all ${comments} comments`}</button>
 				)}
 			</ActionBar>
-			<CommentForm />
+			<CommentForm onPostComment={handlePostComment} />
 			{onModal && (
 				<ModalPortal>
 					<PostModal onClose={() => setOnModal(false)}>

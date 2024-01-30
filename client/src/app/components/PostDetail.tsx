@@ -22,6 +22,7 @@ export default function PostDetail({ post }: Props) {
 	// 💡 api/posts로 가져와서 data를 find(v => v.id ===id ) ❌
 	// api 요청을 /api/posts/${id} 이렇게 해서 가져오기 ! ⭕️
 	const comments = data?.comments;
+	const handlePostComment = (comment: string) => {};
 
 	return (
 		<section className="flex w-full h-full">
@@ -62,7 +63,7 @@ export default function PostDetail({ post }: Props) {
 						)}
 				</ul>
 				<ActionBar post={post} />
-				<CommentForm />
+				<CommentForm onPostComment={handlePostComment} />
 			</div>
 		</section>
 	);
