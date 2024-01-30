@@ -1,16 +1,11 @@
 'use client';
 
-import useSWR from 'swr';
-import { SimplePost } from '@/model/post';
 import PostListCard from './PostListCard';
 import Spinner from './Spinner';
+import usePosts from '../hooks/usePosts';
 
 export default function PostList() {
-	const {
-		data: posts,
-		isLoading: loading,
-		error,
-	} = useSWR<SimplePost[]>('/api/posts');
+	const { posts, isLoading: loading } = usePosts();
 
 	return (
 		<>
