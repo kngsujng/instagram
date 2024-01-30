@@ -1,6 +1,6 @@
 'use client';
 
-import { SimplePost } from '@/model/post';
+import { SimplePost, Comment } from '@/model/post';
 import useSWR from 'swr';
 
 async function updateLike(id: string, like: boolean) {
@@ -49,14 +49,14 @@ export default function usePosts() {
 	};
 
 	// comment
-	const postComment = (post: SimplePost, comment: string) => {
+	const postComment = (post: SimplePost, comment: Comment) => {
 		const newPost = {
 			...post,
 			comments: post.comments + 1,
 		};
 		const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
 
-		return mutate(addComment(post.id, comment), {
+		return mutate(addComment(post.id, comment.text), {
 			optimisticData: newPosts,
 			populateCache: false,
 			revalidate: false,

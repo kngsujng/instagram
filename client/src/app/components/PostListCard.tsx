@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { SimplePost } from '@/model/post';
-import CommentForm from './CommentForm';
+import { SimplePost, Comment } from '@/model/post';
 import ActionBar from './ActionBar';
 import ModalPortal from './ModalPortal';
 import PostModal from './PostModal';
@@ -18,9 +17,10 @@ type Props = {
 
 export default function PostListCard({ post, priority }: Props) {
 	const { username, userImage, image, comments, text } = post;
+
 	const [onModal, setOnModal] = useState<boolean>(false);
 	const { postComment } = usePosts();
-	const handlePostComment = (comment: string) => {
+	const handlePostComment = (comment: Comment) => {
 		postComment(post, comment);
 	};
 	return (
@@ -38,7 +38,10 @@ export default function PostListCard({ post, priority }: Props) {
 				priority={priority}
 				onClick={() => setOnModal(true)}
 			/>
-			<ActionBar post={post}>
+			<ActionBar
+				post={post}
+				onComment={handlePostComment}
+			>
 				<p>
 					<span className="font-bold mr-1">{username}</span>
 					{text}
@@ -50,7 +53,6 @@ export default function PostListCard({ post, priority }: Props) {
 					>{`View all ${comments} comments`}</button>
 				)}
 			</ActionBar>
-			<CommentForm onPostComment={handlePostComment} />
 			{onModal && (
 				<ModalPortal>
 					<PostModal onClose={() => setOnModal(false)}>

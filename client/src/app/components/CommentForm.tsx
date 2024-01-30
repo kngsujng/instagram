@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import SmileIcon from './ui/icons/SmileIcon';
 
 type Props = {

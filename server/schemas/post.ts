@@ -46,8 +46,8 @@ export default {
               to: [{type: 'user'}],
             },
             {
-              title: 'Comment',
-              name: 'comment',
+              title: 'Text',
+              name: 'text',
               type: 'string',
             },
           ],
@@ -57,7 +57,7 @@ export default {
   ],
   preview: {
     select: {
-      title: 'comments.0.comment',
+      title: 'comments.0.text',
       authorName: 'author.name',
       authorUserName: 'author.username',
       media: 'photo',

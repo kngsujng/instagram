@@ -1,14 +1,11 @@
 'use client';
 
-import { FullPost, SimplePost } from '@/model/post';
-import useSWR from 'swr';
+import { SimplePost } from '@/model/post';
 import Image from 'next/image';
 import PostUserProfile from './PostUserProfile';
 import ActionBar from './ActionBar';
-import CommentForm from './CommentForm';
 import Profile from './../components/Profile';
-import useFullPost from '../hooks/usepost';
-import useMe from '../hooks/useMe';
+import useFullPost from '../hooks/usePost';
 
 type Props = {
 	post: SimplePost;
@@ -16,16 +13,10 @@ type Props = {
 
 export default function PostDetail({ post }: Props) {
 	const { id, username, userImage, image } = post;
-	const { user } = useMe();
 	const { post: data, isLoading: loading, postComment } = useFullPost(id);
 	// 💡 api/posts로 가져와서 data를 find(v => v.id ===id ) ❌
 	// api 요청을 /api/posts/${id} 이렇게 해서 가져오기 ! ⭕️
 	const comments = data?.comments;
-	const handlePostComment = (comment: string) => {
-		user &&
-			postComment({ username: user.username, image: user.image, comment });
-	};
-
 	return (
 		<section className="flex w-full h-full">
 			<div className="relative basis-3/5">
@@ -46,7 +37,10 @@ export default function PostDetail({ post }: Props) {
 				<ul className="border-t border-gray-200 h-full overflow-y-auto p-4 mb-1">
 					{comments &&
 						comments.map(
-							({ comment, username: commentUsername, image }, index) => (
+							(
+								{ text: commentText, username: commentUsername, image },
+								index
+							) => (
 								<li
 									key={index}
 									className="flex items-center"
@@ -58,14 +52,16 @@ export default function PostDetail({ post }: Props) {
 									/>
 									<div className="ml-2">
 										<span className="font-bold mr-2">{commentUsername}</span>
-										<span>{comment}</span>
+										<span>{commentText}</span>
 									</div>
 								</li>
 							)
 						)}
 				</ul>
-				<ActionBar post={post} />
-				<CommentForm onPostComment={handlePostComment} />
+				<ActionBar
+					post={post}
+					onComment={postComment}
+				/>
 			</div>
 		</section>
 	);

@@ -9,7 +9,7 @@ const simpleProjection = `
   "userImage" : author->image,
   "image": photo, 
   "likes": likes[]->username,
-  "text": comments[0].comment,
+  "text": comments[0].text,
   "comments": count(comments),
 `;
 
@@ -47,7 +47,7 @@ export async function getPost(id: string) {
     "userImage": author->image,
     "image": photo, 
     "likes": likes[]->username,
-    comments[]{comment, "username": author->username, "image": author->image}
+    comments[]{text, "username": author->username, "image": author->image}
   }
   `
 		)
@@ -113,18 +113,14 @@ export async function dislikePost(postId: string, userId: string) {
 		.commit({ autoGenerateArrayKeys: true });
 }
 
-export async function addComment(
-	postId: string,
-	userId: string,
-	comment: string
-) {
+export async function addComment(postId: string, userId: string, text: string) {
 	return client
 		.patch(postId) //
 		.setIfMissing({ comments: [] }) //
 		.append('comments', [
 			{
 				author: { _ref: userId, _type: 'reference' },
-				comment,
+				text,
 			},
 		]) //
 		.commit({ autoGenerateArrayKeys: true });
