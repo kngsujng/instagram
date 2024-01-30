@@ -7,22 +7,24 @@ import PostUserProfile from './PostUserProfile';
 import ActionBar from './ActionBar';
 import CommentForm from './CommentForm';
 import Profile from './../components/Profile';
+import useFullPost from '../hooks/usepost';
+import useMe from '../hooks/useMe';
 
 type Props = {
 	post: SimplePost;
 };
 
 export default function PostDetail({ post }: Props) {
-	const { id, createdAt, username, userImage, image, likes, text } = post;
-	const {
-		data,
-		isLoading: loading,
-		error,
-	} = useSWR<FullPost>(`/api/posts/${id}`);
+	const { id, username, userImage, image } = post;
+	const { user } = useMe();
+	const { post: data, isLoading: loading, postComment } = useFullPost(id);
 	// 💡 api/posts로 가져와서 data를 find(v => v.id ===id ) ❌
 	// api 요청을 /api/posts/${id} 이렇게 해서 가져오기 ! ⭕️
 	const comments = data?.comments;
-	const handlePostComment = (comment: string) => {};
+	const handlePostComment = (comment: string) => {
+		user &&
+			postComment({ username: user.username, image: user.image, comment });
+	};
 
 	return (
 		<section className="flex w-full h-full">
