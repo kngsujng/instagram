@@ -2,6 +2,12 @@ import { getProviders } from 'next-auth/react';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../[...nextauth]/route';
 import SocialSignInButton from '@/app/components/SocialSignInButton';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Signin',
+	description: 'Signup or Login to Instagram',
+};
 
 type Props = {
 	searchParams: {

@@ -1,7 +1,7 @@
 import { SimplePost } from '@/model/post';
 import BookmarkIcon from './ui/icons/BookmarkIcon';
 import HeartIcon from './ui/icons/HeartIcon';
-import { parseDate } from '@/util/date';
+import { parseDate } from '@/utils/date';
 
 type Props = {
 	likes: string[];

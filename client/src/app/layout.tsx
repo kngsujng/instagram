@@ -8,8 +8,11 @@ import SwrConfigContext from '@/context/SwrConfigContext';
 const openSans = Open_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Instagram',
-	description: 'Next.js 공부 목적의 인스타그램 클론코딩',
+	title: {
+		default: 'Instagram',
+		template: 'Instagram | %s',
+	},
+	description: 'Instagram Photos',
 };
 
 export default function RootLayout({
