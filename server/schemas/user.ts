@@ -34,14 +34,14 @@ export default {
       title: 'Followers',
       name: 'followers',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'user'}]}],
+      of: [{type: 'reference', to: [{type: 'user'}]}], // userId = id
       validation: (Rule: any) => Rule.unique(),
     },
     {
       title: 'Bookmarks',
       name: 'bookmarks',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'post'}]}],
+      of: [{type: 'reference', to: [{type: 'post'}]}], // postId = id
       validation: (Rule: any) => Rule.unique(),
     },
   ],
