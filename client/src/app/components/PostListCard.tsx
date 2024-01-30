@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function PostListCard({ post, priority }: Props) {
-	const { createdAt, username, userImage, image, likes, text } = post;
+	const { username, userImage, image, comments, text } = post;
 	const [onModal, setOnModal] = useState<boolean>(false);
 
 	return (
@@ -34,7 +34,18 @@ export default function PostListCard({ post, priority }: Props) {
 				priority={priority}
 				onClick={() => setOnModal(true)}
 			/>
-			<ActionBar post={post} />
+			<ActionBar post={post}>
+				<p>
+					<span className="font-bold mr-1">{username}</span>
+					{text}
+				</p>
+				{comments > 1 && (
+					<button
+						className="font-bold my-2 text-sky-500"
+						onClick={() => setOnModal(true)}
+					>{`View all ${comments} comments`}</button>
+				)}
+			</ActionBar>
 			<CommentForm />
 			{onModal && (
 				<ModalPortal>
