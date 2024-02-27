@@ -1,3 +1,18 @@
-export default function NewPostpage() {
-	return <div>NewPost 페이지 !</div>;
+import { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import NewPost from '../components/NewPost';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+
+export const metadata: Metadata = {
+	title: 'New Post',
+	description: 'Create a new post',
+};
+
+export default async function NewPostpage() {
+	const session = await getServerSession(authOptions);
+	if (!session?.user) {
+		redirect('/auth/signin');
+	}
+	return <NewPost user={session.user} />;
 }

@@ -9,6 +9,9 @@ export const client = createClient({
 	useCdn: false,
 	apiVersion: '2024-01-23',
 	token: process.env.SANITY_SECRET_TOKEN,
+	fetch: {
+		cache: 'no-store',
+	},
 });
 
 const builder = imageUrlBuilder(client);
@@ -16,3 +19,5 @@ const builder = imageUrlBuilder(client);
 export default function urlFor(image: SanityImageSource) {
 	return builder.image(image).width(800).url();
 }
+
+export const assetsURL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/assets/images/${process.env.SANITY_DATASET}`;
