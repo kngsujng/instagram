@@ -1,7 +1,6 @@
 'use client';
 
 import { ClientSafeProvider, signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 
 type Props = {
@@ -10,8 +9,6 @@ type Props = {
 };
 
 export default function SocialSignInButton({ providers, callbackUrl }: Props) {
-	// const searchParams = useSearchParams();
-	// const callbackUrl = searchParams.get('callbackUrl') as string;
 	return (
 		<>
 			{Object.values(providers).map(({ name, id }) => (

@@ -1,6 +1,6 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { AuthUser } from '@/model/user';
 import { getServerSession } from 'next-auth';
+import { authOptions } from './authOptions';
 
 export async function withSessionUser(
 	handler: (user: AuthUser) => Promise<Response>

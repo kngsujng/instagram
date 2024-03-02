@@ -1,8 +1,8 @@
 import { getProviders } from 'next-auth/react';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../[...nextauth]/route';
 import SocialSignInButton from '@/app/components/SocialSignInButton';
 import { Metadata } from 'next';
+import { authOptions } from '@/utils/authOptions';
 
 export const metadata: Metadata = {
 	title: 'Signin',
@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-	searchParams: {
-		callbackUrl: string;
-	};
+	searchParams: { callbackUrl: string };
 };
 
 export default async function SignInPage({

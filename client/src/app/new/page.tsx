@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import NewPost from '../components/NewPost';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOptions } from '@/utils/authOptions';
 
 export const metadata: Metadata = {
 	title: 'New Post',
