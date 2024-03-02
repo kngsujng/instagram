@@ -97,7 +97,7 @@ export async function addBookmark(userId: string, postId: string) {
 export async function removeBookmark(userId: string, postId: string) {
 	return client
 		.patch(userId) //
-		.unset([`bookmarks[_ref==${postId}]`]) //
+		.unset([`bookmarks[_ref=="${postId}"]`]) //
 		.commit({ autoGenerateArrayKeys: true });
 }
 
