@@ -1,4 +1,5 @@
 import { Profile } from 'next-auth';
+import Image from 'next/image';
 
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -10,15 +11,16 @@ type Props = {
 
 export default function Profile({ image, size = 'lg', border = false }: Props) {
 	return (
-		<div className={getContainerStyle(size, border)}>
-			{/* eslint-disable-next-line @next/next/no-img-element */}
-			<img
+		<div className={`${getContainerStyle(size, border)} relative`}>
+			<Image
 				src={image || ''}
 				alt="user image"
 				className={`rounded-full object-cover bg-white ${
 					getImageSizeStyle(size).image
 				}`}
 				referrerPolicy="no-referrer"
+				fill
+				sizes={'100%'}
 			/>
 		</div>
 	);

@@ -15,6 +15,20 @@ type Props = {
 	priority?: boolean;
 };
 
+function getParametersForUnsplash({
+	width,
+	height,
+	quality,
+	format,
+}: {
+	width: number;
+	height: number;
+	quality: string;
+	format: string;
+}) {
+	return `?w=${width}&h=${height}&q=${quality}&fm=${format}&fit=crop`;
+}
+
 export default function PostListCard({ post, priority }: Props) {
 	const { username, userImage, image, comments, text } = post;
 

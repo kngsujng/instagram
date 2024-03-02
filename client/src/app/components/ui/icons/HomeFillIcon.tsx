@@ -1,5 +1,5 @@
-import { GoHomeFill } from 'react-icons/go';
+import { IoHome } from '@react-icons/all-files/io5/IoHome';
 
 export default function HomeFillIcon() {
-	return <GoHomeFill />;
+	return <IoHome />;
 }

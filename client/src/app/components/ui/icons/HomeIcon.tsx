@@ -1,5 +1,5 @@
-import { GoHome } from 'react-icons/go';
+import { IoHomeOutline } from '@react-icons/all-files/io5/IoHomeOutline';
 
 export default function HomeIcon() {
-	return <GoHome />;
+	return <IoHomeOutline />;
 }

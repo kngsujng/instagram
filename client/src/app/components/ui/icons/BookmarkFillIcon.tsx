@@ -1,5 +1,5 @@
-import { GoBookmarkFill } from 'react-icons/go';
+import { MdBookmark } from '@react-icons/all-files/md/MdBookmark';
 
 export default function BookmarkFillIcon() {
-	return <GoBookmarkFill className="w-6 h-6" />;
+	return <MdBookmark className="w-6 h-6" />;
 }

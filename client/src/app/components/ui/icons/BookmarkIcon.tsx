@@ -1,4 +1,4 @@
-import { GoBookmark } from 'react-icons/go';
+import { MdBookmarkBorder } from '@react-icons/all-files/md/MdBookmarkBorder';
 
 type Props = {
 	className?: string;
@@ -7,7 +7,7 @@ type Props = {
 
 export default function BookmarkIcon({ className, onClick }: Props) {
 	return (
-		<GoBookmark
+		<MdBookmarkBorder
 			className={className || 'w-6 h-6'}
 			onClick={onClick}
 		/>

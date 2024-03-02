@@ -1,4 +1,4 @@
-import { IoIosHeartEmpty } from 'react-icons/io';
+import { IoIosHeartEmpty } from '@react-icons/all-files/io/IoIosHeartEmpty';
 
 type Props = {
 	className?: string;
